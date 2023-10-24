@@ -163,3 +163,7 @@ cython_debug/
 *.class
 APDescription.txt
 MTPs-Main-Container.txt
+.project
+.classpath
+.factorypath
+.settings/
