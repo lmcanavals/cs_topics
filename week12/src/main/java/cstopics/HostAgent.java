@@ -68,7 +68,7 @@ public class HostAgent extends Agent {
 				lista_peces.add(new FishAgent());
 				String localname = "pez_" + i;
 				AgentController ac = container.createNewAgent(localname, "cstopics.FishAgent", null);
-				ac.start();                
+				ac.start();
 			}
 			MainFrame.panel_principal.setEnabled(true);
 			ENABLED = true;

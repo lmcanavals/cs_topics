@@ -18,7 +18,7 @@ public class FishAgent extends Agent {
 	public FishAgent() {
 		x = (int) (100 * Math.random());
 		y = (int) (500 * Math.random());
-		color = Color.RED;
+		color = new Color((int)(Math.random()) * 0x10000000);
 		size = (int) (25 * Math.random() + 5);
 		speed = 10 * 25 / size;
 	}
