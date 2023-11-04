@@ -1,4 +1,6 @@
 import sys
+import threading
+from PySide6.QtWidgets import QApplication
 from pade.acl.aid import AID
 from pade.behaviours.protocols import TimedBehaviour
 from pade.misc.utility import start_loop
@@ -20,7 +22,7 @@ class MyTimedBehaviour(TimedBehaviour):
             fish.updateStatus()
             fish.swim()
 
-        self.agent.gui.update()
+        gui.update()
 
 class HostAgent(Agent):
     gui = None
@@ -38,18 +40,23 @@ class HostAgent(Agent):
             self.fish_list.append(FishAgent())
             # TODO name it and launch it as an agent of chaos
 
-        self.gui = Gui(self)
-        self.gui.show()
-
         mytimed = MyTimedBehaviour(self, .2)
         self.behaviours.append(mytimed)
 
+def agentsexec():
+    start_loop(agents)
 
 if __name__ == '__main__':
     agents = list()
     port = int(sys.argv[1])
-    host_agent_name = 'host_agent_{}@localhost:{}'.format(port, port)
+    host_agent_name = 'host_agent_{}@localhost:{}'.format(port+1, port+1)
     host_agent = HostAgent(AID(name=host_agent_name))
     agents.append(host_agent)
 
-    start_loop(agents)
+    x = threading.Thread(target=agentsexec)
+    x.start()
+    app = QApplication([])
+    gui = Gui(host_agent)
+    gui.show()
+    app.exec()
+    x.join()
