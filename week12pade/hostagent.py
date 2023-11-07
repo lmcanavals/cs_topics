@@ -24,9 +24,23 @@ class MyTimedBehaviour(TimedBehaviour):
 
         gui.update()
 
+class YourTimedBehaviour(TimedBehaviour):
+    def __init__(self, agent, time):
+        super(YourTimedBehaviour, self).__init__(agent, time)
+        self.agent = agent
+
+    def on_time(self):
+        super(YourTimedBehaviour, self).on_time()
+        # display_message(self.agent.aid.localname, 'Updating the fishies!')
+        for fish in self.agent.fish_list:
+            fish.updateStatus()
+            fish.swim()
+
+        gui.update()
+
 class HostAgent(Agent):
     gui = None
-    num_fishes = 5
+    num_fishes = 20000
     fish_list = []
     enabled = False
 
