@@ -2,12 +2,13 @@ import random
 
 from globals import Global
 from pade.core.agent import Agent
+from PySide6.QtGui import QColor
 
 class FishAgent(Agent):
     def __init__(self) -> None:
         self.x = random.randint(1, 100)
         self.y = random.randint(1, 500)
-        self.color = random.randint(0, 0xffffff)
+        self.color = QColor(random.randint(0, 0xffffff))
         self.size = random.randint(5, 30)
         self.speed = 10 * 25 / self.size
         self.status = -1
