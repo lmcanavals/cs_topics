@@ -31,12 +31,8 @@ class YourTimedBehaviour(TimedBehaviour):
 
     def on_time(self):
         super(YourTimedBehaviour, self).on_time()
-        # display_message(self.agent.aid.localname, 'Updating the fishies!')
-        for fish in self.agent.fish_list:
-            fish.updateStatus()
-            fish.swim()
-
-        gui.update()
+        Global.x_center += 3
+        print(Global.x_center)
 
 class HostAgent(Agent):
     gui = None
@@ -55,7 +51,9 @@ class HostAgent(Agent):
             # TODO name it and launch it as an agent of chaos
 
         mytimed = MyTimedBehaviour(self, .2)
+        yourtimed = YourTimedBehaviour(self, 2)
         self.behaviours.append(mytimed)
+        self.behaviours.append(yourtimed)
 
 def agentsexec():
     start_loop(agents)
