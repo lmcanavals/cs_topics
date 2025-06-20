@@ -1,31 +1,28 @@
-package cstopics;
+package upc.cst;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GraphicsConfiguration;
 import java.awt.Toolkit;
+
 import javax.swing.JFrame;
 
-/**
- *
- * @author WillyUgarte
- */
 public class MainFrame extends JFrame {
-	public static AmbientePanel panel_principal;
-	protected HostAgent anfitrion;
+	public static AmbientPanel ambientPanel;
+	protected HostAgent hostAgent;
 
-	public MainFrame(HostAgent anfitrion) {
-		this.anfitrion = anfitrion;
-		try { inicializar(); }
-		catch(Exception e) {
-			System.err.println("exception " + e);
+	public MainFrame(HostAgent hostAgent) {
+		this.hostAgent = hostAgent;
+		try {
+			initialize();
+		} catch (Exception e) {
+			System.err.println("Oh no! " + e);
 			e.printStackTrace();
 		}
 	}
 
-	public void inicializar() {
-		//maximizar el frame
+	public void initialize() {
 		final GraphicsConfiguration config = getGraphicsConfiguration();
 		final int left = Toolkit.getDefaultToolkit().getScreenInsets(config).left;
 		final int right = Toolkit.getDefaultToolkit().getScreenInsets(config).right;
@@ -33,17 +30,17 @@ public class MainFrame extends JFrame {
 		final int bottom = Toolkit.getDefaultToolkit().getScreenInsets(config).bottom;
 		final Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		final int width = screenSize.width - left - right;
-		final int height = screenSize.height - top - bottom;     
-		//setResizable(false);
+		final int height = screenSize.height - top - bottom;
+
 		setSize(width, height);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		setLayout(new BorderLayout());
 		setBackground(Color.BLUE);
-		//
-		panel_principal = new AmbientePanel();
-		panel_principal.setBackground(Color.BLUE);
-		//
-		add(panel_principal, BorderLayout.CENTER);    
+
+		ambientPanel = new AmbientPanel();
+		ambientPanel.setBackground(Color.BLUE);
+
+		add(ambientPanel, BorderLayout.CENTER);
 	}
 }
